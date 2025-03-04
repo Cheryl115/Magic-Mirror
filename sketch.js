@@ -3,7 +3,7 @@ let pHtmlMsg; //pointer to the msg text
 let serialOptions = { baudRate: 9600  }; // define the transimition rate
 let serial;
 
-// Check if the filter is active
+// Check if the filter is active, and send it to Arduino, this appraoch is to help to reduce the useless data exchange.
 let filterActive = false;
 
 
@@ -37,6 +37,7 @@ let w=canvasContainer.clientWidth;
 let h=canvasContainer.clientHeight;
 
 function preload(){
+  // preload the media, cause those image will be used multiple time, to save time and make it more efficient, preload those materials
   // load images
   happyImg = loadImage("./Images/happy-stars.png");
   sadImg = loadImage("./Images/water.png");
@@ -51,7 +52,7 @@ function preload(){
   partySound = loadSound("./Sounds/pedro-pedro-pe.mp3");
   hungrySound = loadSound("./Sounds/hungry-sound.mp3");
 
-  // load the facemesh model
+  // load the facemesh model, limit the face num to 1
   faceMesh = ml5.faceMesh({maxFaces: 1});
 }
 
@@ -81,11 +82,6 @@ function setup() {
   canvas.parent(canvasContainer);
   
   // AR Filter
-
-  // Set button dimensions and spacing
-  let btnSize = 80;
-  let spacing = 50;
-  
 
   // start detecting faces from webcam video
   faceMesh.detectStart(video, gotFaces);
@@ -125,7 +121,6 @@ function draw() {
   else if (joystickDirection == "RIGHT"){
     // choose filter when button pressed
     if (buttonState == "ON"){
-      console.log("sad");
       chooseFilter("sad");
     }
   }
@@ -270,7 +265,7 @@ function drawFilter(img){
   // the filter height should be the ratio as the original one, so we *img.height/img.width
 
   if (img == happyImg){
-
+    // Set the size for happy filter
     filterWidth = faces[0].box.width*2;
     filterHeight = filterWidth*img.height/img.width; 
     // select the position of the filter, 
@@ -287,10 +282,10 @@ function drawFilter(img){
     image(img, -filterWidth/2, - filterHeight/2, filterWidth, filterHeight);
   }
   if (img == sadImg){
-    // select the position of the filter, 
+    // Set the size for sad filter
     filterWidth = filterWidth*0.3;
     filterHeight = filterWidth*img.height/img.width;
-
+    // select the position of the filter
     let filterPosX = faces[0].keypoints[50].x;
     let filterPosY = faces[0].keypoints[50].y;
 
@@ -300,7 +295,7 @@ function drawFilter(img){
     image(img, filterWidth*1.2, - filterHeight/2, filterWidth, filterHeight);
   }
   if (img == partyImg){
-
+    // Set the size for party filter
     filterWidth = faces[0].box.width*1.2;
     filterHeight = filterWidth*img.height/img.width; 
     // the filter height should be the ratio as the original one, so we *img.height/img.width
@@ -318,7 +313,7 @@ function drawFilter(img){
     image(img, filterWidth, - filterHeight, filterWidth, filterHeight);
   }
   if (img == hungryImg){
-
+    // Set the size for hungry filter
     filterWidth = faces[0].box.width*2;
     filterHeight = filterWidth*img.height/img.width; 
     // select the position of the filter, 
@@ -337,7 +332,10 @@ function drawFilter(img){
   
 }
 
-// button function
+// button onclick function
+// For each filter, set the current filter to the target filter.
+// Before playing the sound, ensure that no other audio is playing to prevent overlapping.
+// Each audio & filter lest for 10 seconds.
 function chooseFilter(name){
   filterActive = true;
   if (name == "happy"){
@@ -410,11 +408,13 @@ function chooseFilter(name){
   }
 }
 
+// Clean the filter, set the filter image to a transparent png, and turn the filterActive to false, so the serial can started to send data
 function cleanFilter(){
   currentfilter = withoutImg;
   filterActive = false;
 }
 
+// Click on the button to connect with Arduino board
 function onConnectButtonClick() {
   console.log("Web Serial Button Clicked!")
   if(navigator.serial){
