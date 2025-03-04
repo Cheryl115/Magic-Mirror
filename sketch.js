@@ -108,7 +108,8 @@ function draw() {
   // close the webcam when the distance is >20
   openWebcam();
 
-  //draw the filter
+  // draw the filter, always draw a filter when detecting face. 
+  // The default filter is a transparent png, after user selected, it will changed to the filter that user selected.
   if (faces.length > 0){
     push();
     drawFilter(currentfilter);
@@ -207,7 +208,7 @@ function onSerialDataReceived(eventSender, newData) {
 
       /*
       // Check the triggering condition
-      if (distance <= 80) {
+      if (distance <= 20) {
         console.log(webcamActive);
         // Now check if the webcam is open/active
         if (!webcamActive) {
