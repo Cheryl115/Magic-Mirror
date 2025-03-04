@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <title>Sketch</title>
+    
+        <link rel="stylesheet" type="text/css" href="style.css">
+    
+        <script src="libraries/p5.min.js"></script>
+        <script src="libraries/p5.sound.min.js"></script>
+        <script src="https://unpkg.com/ml5@1/dist/ml5.js"></script>
+        <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+
+    </head>
+
+    <body>
+        <div class = "title-description">
+            <h1>Magic Mirror</h1>
+            <p>The mirror will start working when you step in front of it, use the joystick and button to select your feeling.</p>
+        </div>
+        <div class="horizontal-wrapper">
+            <div class ="wrapper">
+                <div class="canvas-container"></div>
+            </div>
+            <div class="plus-layout">
+                <button class="img-text-button" id="happy" onclick="chooseFilter(this.id)">
+                    <img src="./Images/happy.png" alt="Happy">
+                      <span>Happy</span>
+                </button>
+                <button class="img-text-button" id="sad" onclick="chooseFilter(this.id)">
+                    <img src="./Images/sad.png" alt="Sad">
+                    <span>Sad</span>
+                </button>
+                <button class="img-text-button" id="party" onclick="chooseFilter(this.id)">
+                    <img src="./Images/party.png" alt="Party">
+                    <span>Party</span>
+                </button>
+                <button class="img-text-button" id="hungry" onclick="chooseFilter(this.id)">
+                    <img src="./Images/eat.png" alt="Hungry">
+                    <span>Hungry</span>
+                </button>
+            </div>
+        </div>
+        <div class = "start-container">
+            <button id="start" onclick="onConnectButtonClick()">Connect</button>
+        </div>
+        <script src="https://cdn.jsdelivr.net/gh/makeabilitylab/p5js/_libraries/serial.js"></script>
+        <script src="sketch.js"></script>
+
+    </body>
+</html>

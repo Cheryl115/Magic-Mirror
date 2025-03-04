@@ -1,0 +1,173 @@
+html, body {
+  margin: 40 80;
+  padding: 0;
+  font-family: 'Poppins';font-size: 16px;
+  background-image: url("./Images/background.png");
+  background-position: center;
+}
+
+p{
+  max-width: 480px;
+  text-align: center;
+}
+
+.wrapper {
+  position: relative;
+  width: 700px;
+  height: 70vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.horizontal-wrapper{
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  height: 60vh;
+  gap: 40px;
+  margin: 0;
+}
+
+.canvas-container{
+  box-sizing: border-box;
+  position: relative;
+  border: 20px rgb( 255, 255, 255) solid;
+  background: white;
+  width: 100%;
+  aspect-ratio: 16/9;
+  margin-top: 8vh;
+  box-shadow: 0 4px 6px rgb(0, 0, 0, 0.3);
+}
+
+canvas {
+  display: block;
+}
+
+/* Style for the plus-shaped buttons */
+.plus-btn {
+  width: 80px;
+  height: 100px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  text-align: center;
+  overflow: hidden;
+  position: absolute; /* Allows precise positioning with p5.js */
+  
+  /* Flexbox to stack image and text vertically */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Ensure the image fills the button's width */
+.plus-btn img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Style the text container */
+.plus-btn div {
+  margin-top: 5px;
+  color: #333;
+}
+
+/* Container for the plus sign layout */
+.plus-layout {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  margin: auto;
+}
+
+/* Styling for each button with image and text */
+.img-text-button {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.img-text-button img {
+  width: 50px;
+  height: 50px;
+}
+
+.img-text-button span {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.img-text-button:hover {
+  transform: scale(1.1);
+}
+
+/* Positioning the buttons to form a plus sign */
+button#happy.img-text-button {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+button#sad.img-text-button {
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+}
+
+button#party.img-text-button {
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+button#hungry.img-text-button {
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+}
+
+.title-description{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.start-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#start{
+  background-color: #8A6BBE; 
+  border: none;
+  color: #ffffff;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+h1{
+  margin: 24 auto 8 auto;
+}
+
+p{
+  margin: 8 auto;
+}
